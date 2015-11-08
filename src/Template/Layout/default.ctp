@@ -32,6 +32,19 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+	<?php
+		$user = $this->request->session()->read('Auth.User');
+		if(!empty($user)) {
+			$id = $user['id'];
+			$username = $user['username'];
+			$role = $user['role'];
+		}
+		else {
+			$id = "";
+			$username = "";
+			$role = "";
+		}
+	?>
 </head>
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">
@@ -42,9 +55,30 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </ul>
         <section class="top-bar-section">
             <ul class="right">
-                <li><a target="_blank" href="http://book.cakephp.org/3.0/">Documentation</a></li>
-                <li><a target="_blank" href="http://api.cakephp.org/3.0/">API</a></li>
+			
+				<?php
+					if(!empty($user)){
+						echo '<li>' . $this->Html->link(__('Zalogowany ' . $username), ['controller' => 'Users', 'action' => 'view', $id]) . '</li>';
+						echo '<li>' . $this->Html->link(__('Wyloguj'), ['controller' => 'Users', 'action' => 'logout']) . '</li>';
+					}
+					else {
+						echo '<li>' . $this->Html->link(__('Zaloguj się'), ['controller' => 'Users', 'action' => 'login']) . '</li>';
+					}
+				?>		
+                
             </ul>
+			<ul class ="left">
+				<?php
+					if($role == 'admin'){
+						echo '<li>' . $this->Html->link(__('Temperatury'), ['controller' => 'Temps', 'action' => 'index']) . '</li>';
+						echo '<li>' . $this->Html->link(__('Czujniki temperatur'), ['controller' => 'Sensors', 'action' => 'index']) . '</li>';
+						echo '<li>' . $this->Html->link(__('Użytkownicy'), ['controller' => 'Users', 'action' => 'index']) . '</li>';
+					}
+					else if($role == 'user'){
+						echo '<li>' . $this->Html->link(__('Temperatury'), ['controller' => 'Temps', 'action' => 'index']) . '</li>';
+					}
+				?>
+			</ul>
         </section>
     </nav>
     <?= $this->Flash->render() ?>

@@ -1,0 +1,31 @@
+/** Layout **/
+#mainmenu, #mainmenu ul {list-style: none; margin: 0; padding: 0;}
+#mainmenu ul {width: 160px;}
+#mainmenu ul li {clear: both;}
+#mainmenu > li {float: left; margin-right: 10px; position: relative;}
+#mainmenu > li li {position: relative;}
+#mainmenu > li ul {position: absolute; left: 0;}
+#mainmenu > li ul li ul {position: absolute; left: 160px; top: 0px;}
+ul ul {display: none;}
+ul li:hover > ul {display: block;}
+
+/*POZIOM 1*/
+#mainmenu {margin: 0px 50px; font-family: calibri, tahoma, arial;}
+#mainmenu > li > a {display: table; width: auto; padding: 8px; text-align: center; text-decoration: none; color: #aaa;}
+#mainmenu > li:hover > a {background: #eee; color: #000;}
+.current {background: #303030; color: #000;}
+/*POZIOMY NI¯SZE*/
+#mainmenu ul {font-size: 12px; background: #eee;}
+#mainmenu ul li > a {color: #999; display: block; padding: 5px; text-decoration: none;}
+#mainmenu ul li:hover > a {color: #eee; background: #aaa;}
+
+.arrow {display: inline-block; margin: 0 5px 0; height: 0; vertical-align: top; content: ""; position: absolute;}
+#mainmenu > li > a > .arrow {top: 17px; right: 0; margin-right: -8px; border-top: 3px solid #000; border-right: 3px solid transparent; border-left: 3px solid transparent;}
+ul ul .arrow {top: 10px; right: 0; border-top: 3px solid transparent; border-right: 3px solid transparent; border-left: 3px solid #000; border-bottom: 3px solid transparent;}
+
+#menu2{
+
+    position: absolute;
+    width: 100%;
+    background-color: #000; 
+}

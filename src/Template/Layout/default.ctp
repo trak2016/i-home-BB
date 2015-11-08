@@ -13,12 +13,17 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'I-home';
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <?= $this->Html->charset() ?>
+	<?php
+	echo $this->Html->meta ( 'favicon.ico', '/Home_Icon.ico', array (
+		'type' => 'icon' 
+		) );
+	?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         <?= $cakeDescription ?>:
@@ -69,13 +74,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             </ul>
 			<ul class ="left">
 				<?php
+					echo '<li>' . $this->Html->link(__('Temperatury'), ['controller' => 'Temps', 'action' => 'index']) . '</li>';
+					echo '<li>' . $this->Html->link(__('Czujniki temperatur'), ['controller' => 'Sensors', 'action' => 'index']) . '</li>';
 					if($role == 'admin'){
-						echo '<li>' . $this->Html->link(__('Temperatury'), ['controller' => 'Temps', 'action' => 'index']) . '</li>';
-						echo '<li>' . $this->Html->link(__('Czujniki temperatur'), ['controller' => 'Sensors', 'action' => 'index']) . '</li>';
 						echo '<li>' . $this->Html->link(__('Użytkownicy'), ['controller' => 'Users', 'action' => 'index']) . '</li>';
-					}
-					else if($role == 'user'){
-						echo '<li>' . $this->Html->link(__('Temperatury'), ['controller' => 'Temps', 'action' => 'index']) . '</li>';
 					}
 				?>
 			</ul>

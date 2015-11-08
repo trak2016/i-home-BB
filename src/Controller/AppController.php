@@ -45,6 +45,7 @@ class AppController extends Controller
         $this->loadComponent('Flash');
 		$this->loadComponent('Auth', [
 			//'authorize' => ['Controller'],
+			'authError' => 'Zaloguj się aby uzyskać dostep do tej strony',
             'loginRedirect' => [
                 'controller' => 'Pages',
                 'action' => 'display',

@@ -17,6 +17,7 @@ $this->assign('title', "Użytkownik");
                 <th><?= $this->Paginator->sort('role', 'Typ konta') ?></th>
                 <th><?= $this->Paginator->sort('created', 'Utworzono') ?></th>
                 <th><?= $this->Paginator->sort('modified', 'Ostatnia modyfikacja') ?></th>
+				<th><?= $this->Paginator->sort('description', ['label' => 'Opis']) ?></th>
                 <th class="actions"><?= __('Opcje') ?></th>
             </tr>
         </thead>
@@ -28,6 +29,7 @@ $this->assign('title', "Użytkownik");
                 <td><?= h($user->role) ?></td>
                 <td><?= h($user->created) ?></td>
                 <td><?= h($user->modified) ?></td>
+				<td><?= h($user->description) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('Zobacz'), ['action' => 'view', $user->id]) ?>
                     <?= $this->Html->link(__('Edytuj'), ['action' => 'edit', $user->id]) ?>

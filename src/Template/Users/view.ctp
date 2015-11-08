@@ -23,7 +23,6 @@ else {
 				echo '<li>' . $this->Html->link(__('Lista użytkowników'), ['action' => 'index']) . '</li>';
 			}
 		?>
-        <li><?= $this->Html->link(__('Lista użytkowników'), ['action' => 'index']) ?> </li>
     </ul>
 </nav>
 <div class="users view large-9 medium-8 columns content">

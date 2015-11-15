@@ -33,11 +33,61 @@ class TempsController extends AppController
      */
     public function index()
     {
+		$flag='0';//
+		$this->loadModel('Sensors');
+		$sensors = $this->Sensors->find()->select(['id'])->extract('id')->toArray();
+		array_unshift($sensors,'wszystkie');
+		
+		$this->set('sensors', $sensors);
+		
+		if($this->request->is('post')){
+
+			$this->request->session()->write('sensor_id',$this->request->data['sensor_id']);
+			$this->request->session()->write('date_from',$this->request->data['date_from']); 
+			$this->request->session()->write('date_to',$this->request->data['date_to']); 
+
+			if(isset($this->request->data['reset'])&& $this->request->data['reset']!='' ){
+
+				$this->request->session()->write('sensor_id','');
+				$this->request->session()->write('date_from','');
+				$this->request->session()->write('date_to','');
+				$flag='1';
+			   }
+			}
+
+		$cond_sensor_id = [];
+		$cond_date_from = [];
+		$cond_date_to = [];
+		
+		$search = $this->request->session()->read('sensor_id');
+		if(isset($search) && $search!='' && $search!='0'){
+			$cond_sensor_id = "sensor_id  = " . strip_tags($sensors[$search]);
+		}
+		else{
+			$cond_sensor_id = "sensor_id  like '%'";
+		}
+		
+		$search = $this->request->session()->read('date_from');
+		if(isset($search)&& $search!=''){
+			$cond_date_from = "DATE(temps.created) >= STR_TO_DATE('$search', '%d-%m-%Y')";
+		}
+		
+		$search = $this->request->session()->read('date_to');
+		if(isset($search)&& $search!=''){
+			$cond_date_to = "DATE(temps.created) <= STR_TO_DATE('$search', '%d-%m-%Y')";
+		}
+		
         $this->paginate = [
-            'contain' => ['Sensors']
+            'contain' => ['Sensors'],
+			'conditions' => [$cond_sensor_id, $cond_date_from, $cond_date_to]
         ];
         $this->set('temps', $this->paginate($this->Temps));
+		
         $this->set('_serialize', ['temps']);
+		
+		if($flag=='1'){
+			$this->redirect(['action' => 'index']);
+		}
     }
 
     /**

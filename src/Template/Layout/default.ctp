@@ -33,6 +33,9 @@ $cakeDescription = 'I-home';
 
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('cake.css') ?>
+	
+	<?= $this->Html->script(array('jquery', 'jquery-ui')) ?>
+	<?= $this->Html->css('jquery-ui.css') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>

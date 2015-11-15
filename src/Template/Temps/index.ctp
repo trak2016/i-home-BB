@@ -1,6 +1,24 @@
 <?php
 $this->assign('title', "Temperatury");
 ?>
+
+<script>
+$(function() {
+    $("#date_from").datepicker({
+		dateFormat: 'dd-mm-yy'
+		}
+	);
+});
+
+$(function() {
+    $("#date_to").datepicker( {
+		dateFormat: 'dd-mm-yy'
+		}
+	);
+});
+
+</script>
+
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Opcje') ?></li>
@@ -8,7 +26,37 @@ $this->assign('title', "Temperatury");
     </ul>
 </nav>
 <div class="temps index large-9 medium-8 columns content">
-    <h3><?= __('Temperatury') ?></h3>
+
+<?php echo $this->Form->create('search');?>
+<table>
+	<tr>
+        <td>
+			<?php
+			$session=$this->request->session()->read('sensor_id');
+			$value=isset($session)?$session:'';
+			echo '<label for="sensor_id">ID czujnika temperatury</label>';
+			echo $this->Form->select('sensor_id', $sensors);
+				
+			echo $this->Form->input('date_from',['id'=>'date_from', 'type'=>'text', 'label' => 'Data od'] );
+			echo $this->Form->input('date_to',['id'=>'date_to', 'type'=>'text', 'label' => 'Data do'] );
+			
+			?>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<?php echo $this->Form->input('Filtruj',['type'=>'submit'])?>
+		</td>
+		<td>
+			<?php //echo $this->Form->button('Reset',['type'=>'submit','name'=>'reset'])?>  
+			<?php echo $this->Form->input('Reset',['type'=>'submit','name'=>'reset','label'=>false])?>       
+		</td>
+	</tr>
+</table>
+<?php echo $this->Form->end();?>
+
+
+<h3><?= __('Temperatury') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>

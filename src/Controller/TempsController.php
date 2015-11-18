@@ -12,9 +12,11 @@ use Cake\Event\Event;
 class TempsController extends AppController
 {
 	
+    public $helpers = ['ChartJs.Chartjs' ];
+
 	public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['index', 'view']);
+        $this->Auth->allow(['index', 'view', 'chart']);
     }
 	
 	// public function isAuthorized($user)
@@ -89,6 +91,78 @@ class TempsController extends AppController
 			$this->redirect(['action' => 'index']);
 		}
     }
+	
+	public function chart()
+    {
+		$flag='0';
+		$this->loadModel('Sensors');
+		$sensors = $this->Sensors->find()->select(['id'])->extract('id')->toArray();
+		
+		$this->set('sensors', $sensors);
+		
+		if($this->request->is('post')){
+
+			$this->request->session()->write('sensor_id',$this->request->data['sensor_id']);
+			$this->request->session()->write('date_from',$this->request->data['date_from']); 
+			$this->request->session()->write('date_to',$this->request->data['date_to']); 
+
+			if(isset($this->request->data['reset'])&& $this->request->data['reset']!='' ){
+				
+				$this->request->session()->write('sensor_id',$this->request->data['sensor_id']);
+				$this->request->session()->write('date_from','');
+				$this->request->session()->write('date_to','');
+				$flag='1';
+			   }
+			}
+		
+		$search = $this->request->session()->read('sensor_id');
+		if(isset($search) && $search!=''){
+			$cond_sensor_id = strip_tags($sensors[$search]);
+		}
+		else{
+			$cond_sensor_id = strip_tags($sensors['0']);
+		}
+		
+		if($flag=='1'){
+			$this->redirect(['action' => 'chart']);
+		}
+		
+		$query = $this->Temps->find()->select(['temps.created', 'temp'])->where(['sensor_id' => $cond_sensor_id]);
+		
+		$search = $this->request->session()->read('date_from');
+		if(isset($search)&& $search!=''){
+			$query = $query->where("DATE(temps.created) >= STR_TO_DATE('$search', '%d-%m-%Y')");
+		}
+		
+		$search = $this->request->session()->read('date_to');
+		if(isset($search)&& $search!=''){
+			$query = $query->where("DATE(temps.created) <= STR_TO_DATE('$search', '%d-%m-%Y')");
+		}
+		
+		//$labels = implode ('  ', $query);
+		$labels = $query->extract('temps.created')->toArray();
+		$values = $query->extract('temp')->toArray();
+		
+		$this->set('labels', $labels);
+		
+		$dataChart = [
+			'labels' => $labels,
+			'datasets' => [
+					[ 
+						'label' => "My First dataset",
+						'fillColor' => "rgba(151,187,205,0.2)",
+						'strokeColor' => "rgba(151,187,205,1)",
+						'pointColor' => "rgba(151,187,205,1)",
+						'pointStrokeColor' => "#fff",
+						'pointHighlightFill' => "#fff",
+						'pointHighlightStroke' => "rgba(151,187,205,1)",
+						'data' => $values
+					]
+			]
+		];
+		$this->set('dataChart', $dataChart);
+	}
+	
 
     /**
      * View method

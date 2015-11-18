@@ -22,6 +22,7 @@ $(function() {
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Opcje') ?></li>
+		<li><?= $this->Html->link(__('Wykres temperatur'), ['action' => 'chart']) ?></li>
         <li><?= $this->Html->link(__('Lista czujników temperatury'), ['controller' => 'Sensors', 'action' => 'index']) ?></li>
     </ul>
 </nav>

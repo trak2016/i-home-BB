@@ -71,12 +71,12 @@ class TempsController extends AppController
 		
 		$search = $this->request->session()->read('date_from');
 		if(isset($search)&& $search!=''){
-			$cond_date_from = "DATE(temps.created) >= STR_TO_DATE('$search', '%d-%m-%Y')";
+			$cond_date_from = "DATE(Temps.created) >= STR_TO_DATE('$search', '%d-%m-%Y')";
 		}
 		
 		$search = $this->request->session()->read('date_to');
 		if(isset($search)&& $search!=''){
-			$cond_date_to = "DATE(temps.created) <= STR_TO_DATE('$search', '%d-%m-%Y')";
+			$cond_date_to = "DATE(Temps.created) <= STR_TO_DATE('$search', '%d-%m-%Y')";
 		}
 		
         $this->paginate = [
@@ -127,20 +127,20 @@ class TempsController extends AppController
 			$this->redirect(['action' => 'chart']);
 		}
 		
-		$query = $this->Temps->find()->select(['temps.created', 'temp'])->where(['sensor_id' => $cond_sensor_id]);
+		$query = $this->Temps->find()->select(['Temps.created', 'temp'])->where(['sensor_id' => $cond_sensor_id]);
 		
 		$search = $this->request->session()->read('date_from');
 		if(isset($search)&& $search!=''){
-			$query = $query->where("DATE(temps.created) >= STR_TO_DATE('$search', '%d-%m-%Y')");
+			$query = $query->where("DATE(Temps.created) >= STR_TO_DATE('$search', '%d-%m-%Y')");
 		}
 		
 		$search = $this->request->session()->read('date_to');
 		if(isset($search)&& $search!=''){
-			$query = $query->where("DATE(temps.created) <= STR_TO_DATE('$search', '%d-%m-%Y')");
+			$query = $query->where("DATE(Temps.created) <= STR_TO_DATE('$search', '%d-%m-%Y')");
 		}
 		
 		//$labels = implode ('  ', $query);
-		$labels = $query->extract('temps.created')->toArray();
+		$labels = $query->extract('created')->toArray();
 		$values = $query->extract('temp')->toArray();
 		
 		$this->set('labels', $labels);

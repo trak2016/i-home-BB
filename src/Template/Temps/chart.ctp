@@ -27,6 +27,7 @@ $(function() {
     </ul>
 </nav>
 
+<div class="temps index large-9 medium-8 columns content">
 
 <?php echo $this->Form->create('search');?>
 <table>
@@ -63,10 +64,6 @@ $(function() {
 </table>
 <?php echo $this->Form->end();?>
 
-
-
-
-<div class="temps index large-8 medium-8 columns content" >
 <table>
 <tr>
 <td>

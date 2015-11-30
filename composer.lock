@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dbca1f8ebc8a5570a743948d6a22d9bd",
-    "content-hash": "a4bff8b89c11cf726b0f4bd116a994f1",
+    "hash": "b0d60e640664b8f1a496ccc95dfee859",
+    "content-hash": "5a6e0241c2ad93c131269a9e6f051a64",
     "packages": [
         {
             "name": "aura/installer-default",
@@ -287,124 +287,6 @@
             "time": "2015-06-10 10:35:13"
         },
         {
-            "name": "friendsofcake/crud",
-            "version": "4.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FriendsOfCake/crud.git",
-                "reference": "f234ff243edad6c0f7e517bc72a1639cee66b3b3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfCake/crud/zipball/f234ff243edad6c0f7e517bc72a1639cee66b3b3",
-                "reference": "f234ff243edad6c0f7e517bc72a1639cee66b3b3",
-                "shasum": ""
-            },
-            "require": {
-                "cakephp/cakephp": "~3.1"
-            },
-            "require-dev": {
-                "friendsofcake/cakephp-test-utilities": "dev-master",
-                "friendsofcake/search": "dev-master"
-            },
-            "suggest": {
-                "friendsofcake/crud-view": "Automated admin backend based on your Crud configuration.",
-                "friendsofcake/search": "Provides search capabilities for the Crud plugin."
-            },
-            "type": "cakephp-plugin",
-            "autoload": {
-                "psr-4": {
-                    "Crud\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Christian Winther",
-                    "homepage": "http://cakephp.nu/",
-                    "role": "Author"
-                },
-                {
-                    "name": "José Lorenzo Rodríguez",
-                    "homepage": "https://github.com/lorenzo",
-                    "role": "Contributor"
-                },
-                {
-                    "name": "Andy Dawson",
-                    "homepage": "https://github.com/ad7six",
-                    "role": "Contributor"
-                },
-                {
-                    "name": "ADmad",
-                    "homepage": "https://github.com/admad",
-                    "role": "Contributor"
-                }
-            ],
-            "description": "CakePHP Application development on steroids - rapid prototyping / scaffolding & production ready code - XML / JSON APIs and more",
-            "homepage": "https://github.com/FriendsOfCake/crud",
-            "keywords": [
-                "bake",
-                "cake",
-                "cakephp",
-                "create",
-                "crud",
-                "delete",
-                "retrieve",
-                "scaffold",
-                "scaffolding",
-                "update"
-            ],
-            "time": "2015-10-12 16:16:41"
-        },
-        {
-            "name": "friendsofcake/search",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FriendsOfCake/search.git",
-                "reference": "a74975c053496f979245995107923fa0a71252d1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfCake/search/zipball/a74975c053496f979245995107923fa0a71252d1",
-                "reference": "a74975c053496f979245995107923fa0a71252d1",
-                "shasum": ""
-            },
-            "require-dev": {
-                "cakephp/cakephp": "~3.0",
-                "friendsofcake/cakephp-test-utilities": "dev-master"
-            },
-            "type": "cakephp-plugin",
-            "autoload": {
-                "psr-4": {
-                    "Search\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Christian Winther",
-                    "homepage": "http://cakephp.nu/",
-                    "role": "Author"
-                }
-            ],
-            "description": "CakePHP 3.0 easy search framework",
-            "homepage": "https://github.com/FriendsOfCake/search",
-            "keywords": [
-                "cake3",
-                "cakephp",
-                "cakephp3",
-                "search"
-            ],
-            "time": "2015-11-01 11:52:24"
-        },
-        {
             "name": "ircmaxell/password-compat",
             "version": "v1.0.4",
             "source": {
@@ -594,7 +476,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/06740769d9b02365cfbed104f9a44776a3d14478",
+                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/43313ad89c0ad1851aeefafc164e2822e49867e3",
                 "reference": "43313ad89c0ad1851aeefafc164e2822e49867e3",
                 "shasum": ""
             },
@@ -1305,7 +1187,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "friendsofcake/search": 20,
         "psy/psysh": 0
     },
     "prefer-stable": true,

@@ -18,15 +18,15 @@ else {
 		<?php
 			if($logged_role == 'admin'){
 				echo '<li>' . $this->Html->link(__('Nowy'), ['action' => 'add']) . '</li>';
-				echo '<li>' . $this->Html->link(__('Edytuj'), ['action' => 'edit', $sensor->id]) . '</li>';
-				echo '<li>' . $this->Form->postLink(__('Usuń czujnik'), ['action' => 'delete', $sensor->id], ['confirm' => __('Czy na pewno usunąć czujnik temperatury o ID #{0}?', $sensor->id)]) . '</li>';
+				echo '<li>' . $this->Html->link(__('Edytuj'), ['action' => 'edit', $sensor->device_id]) . '</li>';
+				echo '<li>' . $this->Form->postLink(__('Usuń czujnik'), ['action' => 'delete', $sensor->device_id], ['confirm' => __('Czy na pewno usunąć czujnik temperatury o ID #{0}?', $sensor->device_id)]) . '</li>';
 				echo '<li>' . $this->Html->link(__('Lista czujników'), ['action' => 'index']) . '</li>';
 			}
 		?>
     </ul>
 </nav>
 <div class="sensors view large-9 medium-8 columns content">
-    <h3><?= 'ID czujnika: ', h($sensor->id) ?></h3>
+    <h3><?= 'ID czujnika: ', h($sensor->device_id) ?></h3>
     <table class="vertical-table">
         <tr>
             <th><?= __('Adres IP') ?></th>

@@ -74,7 +74,7 @@ $(function() {
             <?php foreach ($temps as $temp): ?>
             <tr>
                 <td><?= $this->Number->format($temp->id) ?></td>
-                <td><?= $temp->has('sensor') ? $this->Html->link($temp->sensor->id, ['controller' => 'Sensors', 'action' => 'view', $temp->sensor->id]) : '' ?></td>
+                <td><?= $temp->has('sensor') ? $this->Html->link($temp->sensor->device_id, ['controller' => 'Sensors', 'action' => 'view', $temp->sensor->device_id]) : '' ?></td>
                 <td><?= $this->Number->format($temp->temp) ?></td>
                 <td><?= h($temp->created) ?></td>
 				<td><?= h($temp->description) ?></td>

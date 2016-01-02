@@ -27,7 +27,7 @@ else {
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th><?= $this->Paginator->sort('id', 'ID') ?></th>
+				<th><?= $this->Paginator->sort('device_id', 'ID sensora') ?></th>
                 <th><?= $this->Paginator->sort('ip_address', 'Adres IP') ?></th>
                 <th><?= $this->Paginator->sort('created', 'Dodany') ?></th>
                 <th><?= $this->Paginator->sort('modified', 'Ostatnia modyfikacja') ?></th>
@@ -38,18 +38,18 @@ else {
         <tbody>
             <?php foreach ($sensors as $sensor): ?>
             <tr>
-                <td><?= $this->Number->format($sensor->id) ?></td>
+				<td><?= $this->Number->format($sensor->device_id) ?></td>
                 <td><?= h($sensor->ip_address) ?></td>
                 <td><?= h($sensor->created) ?></td>
                 <td><?= h($sensor->modified) ?></td>
 				<td><?= h($sensor->description) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('Zobacz'), ['action' => 'view', $sensor->id]) ?>
+                    <?= $this->Html->link(__('Zobacz'), ['action' => 'view', $sensor->device_id]) ?>
 					<?php
 						if($logged_role == 'admin'){
 					?>
-							<?= $this->Html->link(__('Edytuj'), ['action' => 'edit', $sensor->id]) ?>
-							<?= $this->Form->postLink(__('Usuń'), ['action' => 'delete', $sensor->id], ['confirm' => __('Czy na pewno usunąć czujnik o ID #{0}?', $sensor->id)]) ?>
+							<?= $this->Html->link(__('Edytuj'), ['action' => 'edit', $sensor->device_id]) ?>
+							<?= $this->Form->postLink(__('Usuń'), ['action' => 'delete', $sensor->device_id], ['confirm' => __('Czy na pewno usunąć czujnik o ID #{0}?', $sensor->device_id)]) ?>
 					<?php
 						}
 					?>

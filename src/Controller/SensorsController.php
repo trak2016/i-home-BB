@@ -39,15 +39,26 @@ class SensorsController extends AppController
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function view($id = null)
+     public function view($device_id = null)//zamiast id przekazywany jest device_id
     {
+		$id = $this->Sensors->find()->where(['device_id' => $device_id])->select(['id'])->extract('id')->toArray();//na podstawie device_id wyszukiwany jest id
+		
         $sensor = $this->Sensors->get($id, [
             'contain' => ['Temps']
         ]);
         $this->set('sensor', $sensor);
         $this->set('_serialize', ['sensor']);
-    }
+    } 
 
+	/*public function view($device_id = null)
+    {
+		
+        $id = $this->Sensors->find()
+			->where(['device_id' => $device_id]);
+        $this->set('sensor', $sensor);
+        $this->set('_serialize', ['sensor']);
+    }*/
+	
     /**
      * Add method
      *
@@ -76,8 +87,9 @@ class SensorsController extends AppController
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit($device_id = null)
     {
+		$id = $this->Sensors->find()->where(['device_id' => $device_id])->select(['id'])->extract('id')->toArray();
         $sensor = $this->Sensors->get($id, [
             'contain' => []
         ]);
@@ -101,8 +113,9 @@ class SensorsController extends AppController
      * @return void Redirects to index.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete($device_id = null)
     {
+		$id = $this->Sensors->find()->where(['device_id' => $device_id])->select(['id'])->extract('id')->toArray();
         $this->request->allowMethod(['post', 'delete']);
         $sensor = $this->Sensors->get($id);
         if ($this->Sensors->delete($sensor)) {

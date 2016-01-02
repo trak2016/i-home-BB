@@ -6,8 +6,8 @@ $this->assign('title', "Czujniki temperatury");
         <li class="heading"><?= __('Opcje') ?></li>
         <li><?= $this->Form->postLink(
                 __('Usuń ten czujnik'),
-                ['action' => 'delete', $sensor->id],
-                ['confirm' => __('Czy na pewno usunąć czujnik o ID #{0}?', $sensor->id)]
+                ['action' => 'delete', $sensor->device_id],
+                ['confirm' => __('Czy na pewno usunąć czujnik o ID #{0}?', $sensor->device_id)]
             )
         ?></li>
 
@@ -16,7 +16,7 @@ $this->assign('title', "Czujniki temperatury");
 <div class="sensors form large-9 medium-8 columns content">
     <?= $this->Form->create($sensor) ?>
     <fieldset>
-        <legend><?= __('Edytuj dane czujnika temperatury (ID: {0})', $sensor->id) ?></legend>
+        <legend><?= __('Edytuj dane czujnika temperatury (ID: {0})', $sensor->device_id) ?></legend>
         <?php
             echo $this->Form->input('ip_address', ['label' => 'Adres IP']);
             echo $this->Form->input('description', ['label' => 'Opis']);

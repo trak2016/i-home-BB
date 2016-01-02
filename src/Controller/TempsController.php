@@ -37,8 +37,11 @@ class TempsController extends AppController
     {
 		$flag='0';//
 		$this->loadModel('Sensors');
-		$sensors = $this->Sensors->find()->select(['id'])->extract('id')->toArray();
+		$sensors = $this->Sensors->find()->select(['id', 'device_id']);
+		$ids = $sensors->extract('id')->toArray();
+		$sensors = $sensors->extract('device_id')->toArray();
 		array_unshift($sensors,'wszystkie');
+		array_unshift($ids,'wszystkie');
 		
 		$this->set('sensors', $sensors);
 		
@@ -64,6 +67,7 @@ class TempsController extends AppController
 		$search = $this->request->session()->read('sensor_id');
 		if(isset($search) && $search!='' && $search!='0'){
 			$cond_sensor_id = "sensor_id  = " . strip_tags($sensors[$search]);
+			$this->request->session()->write('sensor_id', '');
 		}
 		else{
 			$cond_sensor_id = "sensor_id  like '%'";
@@ -72,11 +76,13 @@ class TempsController extends AppController
 		$search = $this->request->session()->read('date_from');
 		if(isset($search)&& $search!=''){
 			$cond_date_from = "DATE(Temps.created) >= STR_TO_DATE('$search', '%d-%m-%Y')";
+			$this->request->session()->write('date_from', '');
 		}
 		
 		$search = $this->request->session()->read('date_to');
 		if(isset($search)&& $search!=''){
 			$cond_date_to = "DATE(Temps.created) <= STR_TO_DATE('$search', '%d-%m-%Y')";
+			$this->request->session()->write('date_to', '');
 		}
 		
         $this->paginate = [
@@ -96,7 +102,7 @@ class TempsController extends AppController
     {
 		$flag='0';
 		$this->loadModel('Sensors');
-		$sensors = $this->Sensors->find()->select(['id'])->extract('id')->toArray();
+		$sensors = $this->Sensors->find()->select(['device_id'])->extract('device_id')->toArray();
 		
 		$this->set('sensors', $sensors);
 		
@@ -118,6 +124,7 @@ class TempsController extends AppController
 		$search = $this->request->session()->read('sensor_id');
 		if(isset($search) && $search!=''){
 			$cond_sensor_id = strip_tags($sensors[$search]);
+			$this->request->session()->write('sensor_id', '');
 		}
 		else{
 			$cond_sensor_id = strip_tags($sensors['0']);
@@ -132,11 +139,13 @@ class TempsController extends AppController
 		$search = $this->request->session()->read('date_from');
 		if(isset($search)&& $search!=''){
 			$query = $query->where("DATE(Temps.created) >= STR_TO_DATE('$search', '%d-%m-%Y')");
+			$this->request->session()->write('date_from', '');
 		}
 		
 		$search = $this->request->session()->read('date_to');
 		if(isset($search)&& $search!=''){
 			$query = $query->where("DATE(Temps.created) <= STR_TO_DATE('$search', '%d-%m-%Y')");
+			$this->request->session()->write('date_to', '');
 		}
 		
 		//$labels = implode ('  ', $query);

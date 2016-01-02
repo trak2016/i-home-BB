@@ -7,6 +7,8 @@ use Cake\ORM\Entity;
  * Sensor Entity.
  *
  * @property int $id
+ * @property int $device_id
+ * @property \App\Model\Entity\Device $device
  * @property string $ip_address
  * @property string $description
  * @property \Cake\I18n\Time $created

@@ -33,7 +33,8 @@ class TempsTable extends Table
 
         $this->belongsTo('Sensors', [
             'foreignKey' => 'sensor_id',
-            'joinType' => 'INNER'
+            'joinType' => 'INNER',
+			'bindingKey' => 'device_id'
         ]);
     }
 

@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
 /**
  * Sensors Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Devices
  * @property \Cake\ORM\Association\HasMany $Temps
  */
 class SensorsTable extends Table
@@ -31,8 +32,13 @@ class SensorsTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->belongsTo('Devices', [
+            'foreignKey' => 'device_id',
+            'joinType' => 'INNER'
+        ]);
         $this->hasMany('Temps', [
-            'foreignKey' => 'sensor_id'
+            'foreignKey' => 'sensor_id',
+			'bindingKey' => 'device_id'
         ]);
     }
 
@@ -49,12 +55,24 @@ class SensorsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('ip_address')
-            ->add('ip_address', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->allowEmpty('ip_address');
 
         $validator
             ->allowEmpty('description');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->existsIn(['device_id'], 'Devices'));
+        return $rules;
     }
 }

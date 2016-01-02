@@ -18,7 +18,8 @@ class TempsTableTest extends TestCase
      */
     public $fixtures = [
         'app.temps',
-        'app.sensors'
+        'app.sensors',
+        'app.devices'
     ];
 
     /**
